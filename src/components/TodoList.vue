@@ -9,6 +9,9 @@
         placeholder="Add new todo"
       />
       <button @click="addTodo" class="submit-btn">Add</button>
+      <button @click="toggleCompletedFilter" class="filter-btn">
+        {{ showCompleted ? "Hide Completed" : "Show Completed" }}
+      </button>
     </div>
     <table class="todo-table">
       <thead>
@@ -19,7 +22,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(todo, index) in todos" :key="index" class="todo-item">
+        <tr
+          v-for="(todo, index) in filteredTodos"
+          :key="index"
+          class="todo-item"
+        >
           <td>
             <input
               class="todo-checkbox"
@@ -65,6 +72,7 @@ export default {
       newTodo: "",
       todos: [],
       todoEditText: "",
+      showCompleted: true,
     };
   },
   methods: {
@@ -91,12 +99,39 @@ export default {
         this.todos[index].editing = false;
         this.todoEditText = "";
       } else {
-        this.todos.splice(index, 1);
+        this.removeTodo(index);
+      }
+    },
+    saveTodo(index) {
+      if (this.todos[index].editing && this.todoEditText.trim() !== "") {
+        this.todos[index].text = this.todoEditText;
+        this.todos[index].editing = false;
+        this.todoEditText = "";
+      } else if (!this.todos[index].editing && this.newTodo.trim() !== "") {
+        this.todos.push({
+          text: this.newTodo,
+          completed: false,
+          editing: false,
+        });
+        this.newTodo = "";
+      }
+    },
+    toggleCompletedFilter() {
+      this.showCompleted = !this.showCompleted;
+    },
+  },
+  computed: {
+    filteredTodos() {
+      if (this.showCompleted) {
+        return this.todos;
+      } else {
+        return this.todos.filter((todo) => !todo.completed);
       }
     },
   },
 };
 </script>
+
 <style scoped>
 .todo-list {
   margin: 7rem auto;
@@ -231,5 +266,16 @@ input.edit-input {
   border-radius: 7px;
   font-size: 1rem;
   font-weight: 500;
+}
+.filter-btn {
+  background-color: #ffcc00;
+  padding: 0.5rem 1rem;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  border-radius: 7px;
+  font-size: 1rem;
+  font-weight: 800;
+  margin-left: 10px;
 }
 </style>
