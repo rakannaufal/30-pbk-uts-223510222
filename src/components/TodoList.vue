@@ -8,7 +8,7 @@
         @keyup.enter="addTodo"
         placeholder="Add new todo"
       />
-      <button @click="addTodo" class="submit-btn">Submit</button>
+      <button @click="addTodo" class="submit-btn">Add</button>
     </div>
     <table class="todo-table">
       <thead>
