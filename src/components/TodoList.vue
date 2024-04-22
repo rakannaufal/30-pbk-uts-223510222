@@ -32,7 +32,7 @@
             <input
               v-if="todo.editing"
               v-model="todoEditText"
-              @keyup.enter="saveTodo(index)"
+              @keyup.enter="saveTodoOnEnter(index)"
               @blur="saveTodo(index)"
               class="edit-input"
             />
@@ -85,7 +85,7 @@ export default {
       this.todos[index].editing = true;
       this.todoEditText = this.todos[index].text;
     },
-    saveTodo(index) {
+    saveTodoOnEnter(index) {
       if (this.todoEditText.trim() !== "") {
         this.todos[index].text = this.todoEditText;
         this.todos[index].editing = false;
@@ -185,7 +185,7 @@ input.edit-input {
 }
 
 .edit-input {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   border: none;
   font-size: 1rem;
   border-radius: 3px;
