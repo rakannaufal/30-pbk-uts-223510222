@@ -52,6 +52,7 @@
             >
               Edit
             </button>
+
             <button v-if="todo.editing" @click="saveTodo(index)" class="ok-btn">
               OK
             </button>
