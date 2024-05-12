@@ -16,7 +16,7 @@
         <h2>Postingan dari {{ nameFormat }}</h2>
         <ul>
           <li v-for="post in filteredPosts" :key="post.id">
-            <h3>{{ post.title }}</h3>
+            <h3> Title : {{ post.title }}</h3>
             <p>{{ post.body }}</p>
             <p>Ditulis oleh: {{ getUserById(post.userId).name }}</p>
           </li>
@@ -104,6 +104,10 @@ h1 {
   text-align: center;
   color: #fff;
 }
+h3 {
+  font-weight: bold;
+  font-size: 1.2rem;
+}  
 .container {
   margin: 7rem auto;
   width: 800px;
