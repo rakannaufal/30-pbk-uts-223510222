@@ -1,13 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router";
-import TodoList from "../components/TodoList.vue";
+import TodoView from "../views/TodoView.vue";
+import PostView from "../views/PostView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
-      name: "home",
-      component: TodoList,
+      name: "todo",
+      component: TodoView,
+    },
+    {
+      path: "/post",
+      name: "post",
+      component: PostView,
     },
   ],
 });

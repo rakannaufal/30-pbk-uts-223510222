@@ -1,16 +1,29 @@
 <template>
   <div id="app">
-    <TodoList />
+    <Navbar />
+    <router-view />
   </div>
 </template>
 
-<script>
-import TodoList from "./components/TodoList.vue";
+<script setup>
+import { defineComponent } from "vue";
+import Navbar from "./components/Navbar.vue";
+import { createRouter, createWebHistory } from "vue-router";
+import TodoView from "./views/TodoView.vue";
+import PostView from "./views/PostView.vue";
 
-export default {
-  name: "App",
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    { path: "/", component: TodoView },
+    { path: "/post", component: PostView },
+  ],
+});
+
+defineComponent({
   components: {
-    TodoList,
+    Navbar,
   },
-};
+  router,
+});
 </script>
