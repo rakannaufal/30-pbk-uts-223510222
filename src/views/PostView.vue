@@ -35,7 +35,6 @@ export default {
     const selectedUser = ref(null);
     const posts = ref([]);
 
-    // Fetch users from JSONPlaceholder
     const fetchUsers = async () => {
       const response = await fetch(
         "https://jsonplaceholder.typicode.com/users"
@@ -44,7 +43,6 @@ export default {
       users.value = data;
     };
 
-    // Fetch posts from JSONPlaceholder
     const fetchPosts = async () => {
       const response = await fetch(
         "https://jsonplaceholder.typicode.com/posts"
@@ -53,7 +51,6 @@ export default {
       posts.value = data;
     };
 
-    // Filter posts based on selected user
     const filteredPosts = computed(() => {
       if (selectedUser.value === null) {
         return posts.value;
@@ -61,13 +58,11 @@ export default {
       return posts.value.filter((post) => post.userId === selectedUser.value);
     });
 
-    // Fetch data on mount
     onMounted(() => {
       fetchUsers();
       fetchPosts();
     });
 
-    // Function to get user by ID
     const getUserById = (userId) => {
       return (
         users.value.find((user) => user.id === userId) || {
@@ -76,7 +71,6 @@ export default {
       );
     };
 
-    // Format user name
     const nameFormat = computed(() => {
       if (selectedUser.value === null) {
         return "Semua User";
