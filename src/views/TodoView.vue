@@ -66,71 +66,70 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      newTodo: "",
-      todos: [],
-      todoEditText: "",
-      showCompleted: true,
-    };
-  },
-  methods: {
-    addTodo() {
-      if (this.newTodo.trim() !== "") {
-        this.todos.push({
-          text: this.newTodo,
-          completed: false,
-          editing: false,
-        });
-        this.newTodo = "";
-      }
-    },
-    removeTodo(index) {
-      this.todos.splice(index, 1);
-    },
-    editTodo(index) {
-      this.todos[index].editing = true;
-      this.todoEditText = this.todos[index].text;
-    },
-    saveTodoOnEnter(index) {
-      if (this.todoEditText.trim() !== "") {
-        this.todos[index].text = this.todoEditText;
-        this.todos[index].editing = false;
-        this.todoEditText = "";
-      } else {
-        this.removeTodo(index);
-      }
-    },
-    saveTodo(index) {
-      if (this.todos[index].editing && this.todoEditText.trim() !== "") {
-        this.todos[index].text = this.todoEditText;
-        this.todos[index].editing = false;
-        this.todoEditText = "";
-      } else if (!this.todos[index].editing && this.newTodo.trim() !== "") {
-        this.todos.push({
-          text: this.newTodo,
-          completed: false,
-          editing: false,
-        });
-        this.newTodo = "";
-      }
-    },
-    toggleCompletedFilter() {
-      this.showCompleted = !this.showCompleted;
-    },
-  },
-  computed: {
-    filteredTodos() {
-      if (this.showCompleted) {
-        return this.todos;
-      } else {
-        return this.todos.filter((todo) => !todo.completed);
-      }
-    },
-  },
+<script setup>
+import { ref, computed } from 'vue';
+
+const newTodo = ref('');
+const todos = ref([]);
+const todoEditText = ref('');
+const showCompleted = ref(true);
+
+const addTodo = () => {
+  if (newTodo.value.trim() !== '') {
+    todos.value.push({
+      text: newTodo.value,
+      completed: false,
+      editing: false,
+    });
+    newTodo.value = '';
+  }
 };
+
+const removeTodo = (index) => {
+  todos.value.splice(index, 1);
+};
+
+const editTodo = (index) => {
+  todos.value[index].editing = true;
+  todoEditText.value = todos.value[index].text;
+};
+
+const saveTodoOnEnter = (index) => {
+  if (todoEditText.value.trim() !== '') {
+    todos.value[index].text = todoEditText.value;
+    todos.value[index].editing = false;
+    todoEditText.value = '';
+  } else {
+    removeTodo(index);
+  }
+};
+
+const saveTodo = (index) => {
+  if (todos.value[index].editing && todoEditText.value.trim() !== '') {
+    todos.value[index].text = todoEditText.value;
+    todos.value[index].editing = false;
+    todoEditText.value = '';
+  } else if (!todos.value[index].editing && newTodo.value.trim() !== '') {
+    todos.value.push({
+      text: newTodo.value,
+      completed: false,
+      editing: false,
+    });
+    newTodo.value = '';
+  }
+};
+
+const toggleCompletedFilter = () => {
+  showCompleted.value = !showCompleted.value;
+};
+
+const filteredTodos = computed(() => {
+  if (showCompleted.value) {
+    return todos.value;
+  } else {
+    return todos.value.filter((todo) => !todo.completed);
+  }
+});
 </script>
 
 <style scoped>
