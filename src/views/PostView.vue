@@ -26,69 +26,55 @@
   </div>
 </template>
 
-<script>
-import { ref, computed, onMounted } from "vue";
+<script setup>
+import { ref, computed, onMounted } from 'vue';
 
-export default {
-  setup() {
-    const users = ref([]);
-    const selectedUser = ref(null);
-    const posts = ref([]);
+const users = ref([]);
+const selectedUser = ref(null);
+const posts = ref([]);
 
-    const fetchUsers = async () => {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
-      );
-      const data = await response.json();
-      users.value = data;
-    };
-
-    const fetchPosts = async () => {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
-      const data = await response.json();
-      posts.value = data;
-    };
-
-    const filteredPosts = computed(() => {
-      if (selectedUser.value === null) {
-        return posts.value;
-      }
-      return posts.value.filter((post) => post.userId === selectedUser.value);
-    });
-
-    onMounted(() => {
-      fetchUsers();
-      fetchPosts();
-    });
-
-    const getUserById = (userId) => {
-      return (
-        users.value.find((user) => user.id === userId) || {
-          name: "User Tidak Ditemukan",
-        }
-      );
-    };
-
-    const nameFormat = computed(() => {
-      if (selectedUser.value === null) {
-        return "Semua User";
-      }
-      const user = getUserById(selectedUser.value);
-      return user.name;
-    });
-
-    return {
-      users,
-      selectedUser,
-      filteredPosts,
-      nameFormat,
-      getUserById,
-    };
-  },
+const fetchUsers = async () => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/users');
+  const data = await response.json();
+  users.value = data;
 };
+
+const fetchPosts = async () => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const data = await response.json();
+  posts.value = data;
+};
+
+const filteredPosts = computed(() => {
+  if (selectedUser.value === null) {
+    return posts.value;
+  }
+  return posts.value.filter((post) => post.userId === selectedUser.value);
+});
+
+onMounted(() => {
+  fetchUsers();
+  fetchPosts();
+});
+
+const getUserById = (userId) => {
+  return (
+    users.value.find((user) => user.id === userId) || {
+      name: 'User Tidak Ditemukan',
+    }
+  );
+};
+
+const nameFormat = computed(() => {
+  if (selectedUser.value === null) {
+    return 'Semua User';
+  }
+  const user = getUserById(selectedUser.value);
+  return user.name;
+});
+
 </script>
+
 
 <style scoped>
 h1 {
