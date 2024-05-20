@@ -2,7 +2,7 @@
   <li class="post-item">
     <h3>Title : {{ post.title }}</h3>
     <p>{{ post.body }}</p>
-    <p>Ditulis oleh: {{ userName }}</p>
+    <p class="by">Ditulis oleh: {{ userName }}</p>
   </li>
 </template>
 
@@ -36,5 +36,10 @@ const userName = computed(() => {
 h3 {
   font-weight: bold;
   font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.by {
+  margin-top: 10px;
+  font-weight: bold;
 }
 </style>
