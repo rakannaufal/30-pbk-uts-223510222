@@ -22,7 +22,7 @@
       @click="toggleCompletedFilter"
       class="filter-btn"
       :label="showCompleted ? 'Hide Completed' : 'Show Completed'"
-      style="background-color: #ffcc00; color: #000; margin-left: 10px"
+      style="background-color: #ffcc00; color: #fff; margin-left: 10px"
     />
   </div>
 </template>
@@ -60,7 +60,7 @@ watch(
 const addTodo = () => {
   if (localNewTodo.value.trim() !== "") {
     emit("addTodo", localNewTodo.value);
-    emit("update:newTodo", ""); // Clear the input after adding
+    emit("update:newTodo", "");
   }
 };
 

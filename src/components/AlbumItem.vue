@@ -2,7 +2,9 @@
   <li class="album-item">
     <div class="album-item-content">
       <h5>Title: {{ album.title }}</h5>
-      <a :href="albumLink" class="view-album-button"> View Album </a>
+      <router-link :to="albumLink" class="view-album-button">
+        View Album
+      </router-link>
     </div>
   </li>
 </template>
@@ -19,11 +21,6 @@ const router = useRouter();
 
 // Hitung link untuk rute album
 const albumLink = computed(() => `/albums/${props.album.userId}`);
-
-// Navigasi ke album
-const navigateToAlbum = () => {
-  router.push(albumLink.value);
-};
 </script>
 
 <style scoped>
