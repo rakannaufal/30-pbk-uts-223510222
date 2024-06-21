@@ -7,7 +7,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
+      path: "/todos",
       name: "todo",
       component: TodoView,
     },
@@ -18,7 +18,7 @@ const router = createRouter({
     },
     {
       path: "/",
-      redirect: "/albums",
+      redirect: "/todos",
     },
     {
       path: "/albums",

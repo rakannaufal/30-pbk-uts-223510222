@@ -6,7 +6,7 @@
       </q-toolbar-title>
 
       <div class="navbar-nav">
-        <router-link to="/" class="nav-link">Todo</router-link>
+        <router-link to="/todos" class="nav-link">Todo</router-link>
         <router-link to="/post" class="nav-link">Post</router-link>
         <router-link to="/albums" class="nav-link">Album</router-link>
       </div>
