@@ -19,49 +19,21 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useTodoStore } from "../stores/todoStore.js";
 import TodoInput from "../components/TodoInput.vue";
 import TodoList from "../components/TodoList.vue";
 
-const newTodo = ref("");
-const todos = ref([]);
-const showCompleted = ref(true);
-
-const updateNewTodo = (value) => {
-  newTodo.value = value;
-};
-
-const addTodo = (todoText) => {
-  if (todoText.trim() !== "") {
-    todos.value.push({
-      text: todoText,
-      completed: false,
-      editing: false,
-    });
-    newTodo.value = ""; // Clear the input after adding
-  }
-};
-
-const removeTodo = (index) => {
-  todos.value.splice(index, 1);
-};
-
-const editTodo = (index) => {
-  todos.value[index].editing = true;
-};
-
-const saveTodo = (index, text) => {
-  if (text.trim() !== "") {
-    todos.value[index].text = text;
-    todos.value[index].editing = false;
-  } else {
-    removeTodo(index);
-  }
-};
-
-const toggleCompletedFilter = () => {
-  showCompleted.value = !showCompleted.value;
-};
+const todoStore = useTodoStore();
+const { newTodo, todos, showCompleted } = storeToRefs(todoStore);
+const {
+  updateNewTodo,
+  addTodo,
+  removeTodo,
+  editTodo,
+  saveTodo,
+  toggleCompletedFilter,
+} = todoStore;
 </script>
 
 <style scoped>

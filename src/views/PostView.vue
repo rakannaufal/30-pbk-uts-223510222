@@ -12,7 +12,7 @@
         </select>
       </div>
       <div class="post-list">
-        <h2>Postingan dari {{ nameFormat }}</h2>
+        <h5>Postingan dari {{ nameFormat }}</h5>
         <ul class="posts-grid">
           <PostItem
             v-for="post in filteredPosts"
@@ -103,9 +103,10 @@ h1 {
   margin: 0 5rem;
   padding: 2rem;
 }
-h3 {
+h5 {
   font-weight: bold;
   font-size: 1.2rem;
+  margin: 1rem 0;
 }
 label {
   font-size: 1.2rem;

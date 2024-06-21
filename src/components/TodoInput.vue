@@ -1,20 +1,35 @@
 <template>
   <div class="input-container">
-    <input
+    <q-input
       class="todo-input"
       v-model="localNewTodo"
       @keyup.enter="addTodo"
       placeholder="Add new todo"
+      outlined
+      dense
+      clearable
+      input-class="custom-input"
+      style="background-color: #fff; border-radius: 5px"
     />
-    <button @click="addTodo" class="submit-btn">Add</button>
-    <button @click="toggleCompletedFilter" class="filter-btn">
-      {{ showCompleted ? "Hide Completed" : "Show Completed" }}
-    </button>
+    <q-btn
+      @click="addTodo"
+      class="submit-btn"
+      label="Add"
+      color="positive"
+      style="background-color: #4caf50; color: #fff"
+    />
+    <q-btn
+      @click="toggleCompletedFilter"
+      class="filter-btn"
+      :label="showCompleted ? 'Hide Completed' : 'Show Completed'"
+      style="background-color: #ffcc00; color: #000; margin-left: 10px"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref, watch } from "vue";
+import { QInput, QBtn } from "quasar";
 
 const props = defineProps({
   newTodo: {
@@ -61,32 +76,19 @@ const toggleCompletedFilter = () => {
   margin-bottom: 0.5rem;
 }
 .todo-input {
+  flex: 1;
   margin-right: 5px;
+}
+.custom-input {
   padding: 0.5rem;
   font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-  flex: 1;
 }
-.submit-btn {
-  background-color: #4caf50;
-  padding: 0.5rem 1rem;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 7px;
-  font-size: 1rem;
-  font-weight: 800;
-}
+.submit-btn,
 .filter-btn {
-  background-color: #ffcc00;
   padding: 0.5rem 1rem;
-  color: #000;
   border: none;
   cursor: pointer;
   border-radius: 7px;
-  font-size: 1rem;
-  font-weight: 800;
-  margin-left: 10px;
+  font-size: 14px;
 }
 </style>
